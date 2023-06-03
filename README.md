@@ -4,7 +4,7 @@
 
 #
 
-#### <h3 align="center"><strong> That project was developed with </strong></h3>
+#### <h3 align="center"><strong> This project was developed with </strong></h3>
 
 #### <h3 align="center">HTML | CSS | JavaScript | Figma | Git | GitHub </h3>
 
