@@ -2,6 +2,7 @@ const fortuneCookie = document.querySelector("#cookie1")
 const screen1 = document.querySelector(".screen1")
 const screen2 = document.querySelector(".screen2")
 const btnReset = document.querySelector("button")
+const sparkleWrapper = document.querySelector(".sparkle-wrapper")
 
 const fortunePhrases = ['A business seat will be available for you, even on EK818.',
   "If you can befriend a fellow EA, you'll never be lonely at work",
@@ -178,7 +179,7 @@ const fortunePhrases = ['A business seat will be available for you, even on EK81
   'Your to-do list trembles in fear. It knows you\'re coming for it.',
   "Someone will say 'We couldn't do this without you.' They're not wrong.",
   'You are the majestic unicorn of productivity. Sparkly. Silent. Slightly overbooked.',
-  'ou will rise like a phoenix... except with better time management and stronger Wi-Fi.',
+  'You will rise like a phoenix... except with better time management and stronger Wi-Fi.',
   'You are the chosen one: foretold in legend, feared by inboxes.',
   'You may not wear armor, but today you slay dragons disguised as calendar invites.',
   "You'll get more done before lunch than most people do in two days. And you'll still be humble about it.",
@@ -194,9 +195,218 @@ const fortunePhrases = ['A business seat will be available for you, even on EK81
 // Initialize with a random fortune
 let item = Math.round(Math.random() * (fortunePhrases.length - 1))
 
-fortuneCookie.addEventListener('click', openCookie)
+// Add sparkle effect on hover
+sparkleWrapper.addEventListener('mousemove', createSparkle)
+sparkleWrapper.addEventListener('mouseenter', startIntenseSparkles)
+sparkleWrapper.addEventListener('mouseleave', stopIntenseSparkles)
+fortuneCookie.addEventListener('click', e => {
+  openCookie()
+  createExplosion(e.clientX, e.clientY)
+})
 btnReset.addEventListener('click', cookieReset)
 document.addEventListener('keypress', handleEnter)
+
+// Variable to store interval ID
+let sparkleInterval = null
+
+// Function to start intense sparkles
+function startIntenseSparkles() {
+  // Create immediate sparkles
+  for (let i = 0; i < 10; i++) {
+    setTimeout(() => {
+      const rect = sparkleWrapper.getBoundingClientRect()
+      const x = rect.left + Math.random() * rect.width
+      const y = rect.top + Math.random() * rect.height
+      createSparkleAt(x - rect.left, y - rect.top)
+    }, i * 50)
+  }
+  
+  // Create continuous sparkles
+  sparkleInterval = setInterval(() => {
+    const rect = sparkleWrapper.getBoundingClientRect()
+    const x = rect.left + Math.random() * rect.width
+    const y = rect.top + Math.random() * rect.height
+    createSparkleAt(x - rect.left, y - rect.top)
+  }, 100)
+}
+
+// Function to stop intense sparkles
+function stopIntenseSparkles() {
+  clearInterval(sparkleInterval)
+}
+
+// Function to create sparkles at mouse position
+function createSparkle(e) {
+  const rect = sparkleWrapper.getBoundingClientRect()
+  const x = e.clientX - rect.left
+  const y = e.clientY - rect.top
+  createSparkleAt(x, y)
+}
+
+// Function to create sparkle at a specific position
+function createSparkleAt(x, y) {
+  const sparkle = document.createElement('div')
+  sparkle.className = 'sparkle'
+  
+  // Add random size class
+  const sizeClasses = ['tiny', 'medium', 'large']
+  const randomSizeClass = sizeClasses[Math.floor(Math.random() * sizeClasses.length)]
+  sparkle.classList.add(randomSizeClass)
+  
+  // Set sparkle position
+  sparkle.style.left = `${x}px`
+  sparkle.style.top = `${y}px`
+  
+  // Random rotation
+  const initialRotation = Math.random() * 360
+  sparkle.style.transform = `rotate(${initialRotation}deg)`
+  
+  // Random color variation
+  const hue = 40 + Math.random() * 20 // Gold range
+  const saturation = 80 + Math.random() * 20
+  const lightness = 50 + Math.random() * 30
+  sparkle.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`
+  
+  // Add sparkle to DOM
+  sparkleWrapper.appendChild(sparkle)
+  
+  // Remove sparkle after animation finishes
+  setTimeout(() => {
+    sparkle.remove()
+  }, 800) // Increased to account for longer animations on larger stars
+}
+
+// Function to create explosion
+function createExplosion(x, y) {
+  // Create main explosion element
+  const explosion = document.createElement('div')
+  explosion.className = 'explosion'
+  explosion.style.left = `${x}px`
+  explosion.style.top = `${y}px`
+  document.body.appendChild(explosion)
+  
+  // Create multiple explosions for more intensity
+  for (let i = 0; i < 3; i++) {
+    setTimeout(() => {
+      const secondaryExplosion = document.createElement('div')
+      secondaryExplosion.className = 'explosion'
+      secondaryExplosion.style.left = `${x + (Math.random() - 0.5) * 20}px`
+      secondaryExplosion.style.top = `${y + (Math.random() - 0.5) * 20}px`
+      secondaryExplosion.style.transform = 'scale(0.7)'
+      document.body.appendChild(secondaryExplosion)
+      
+      setTimeout(() => {
+        secondaryExplosion.remove()
+      }, 800)
+    }, i * 100)
+  }
+  
+  // Create flying stars (increased number)
+  for (let i = 0; i < 20; i++) {
+    createStar(x, y)
+  }
+  
+  // Create additional particles
+  for (let i = 0; i < 40; i++) {
+    createParticle(x, y)
+  }
+  
+  // Create sparkle burst
+  for (let i = 0; i < 30; i++) {
+    setTimeout(() => {
+      const burstX = x + (Math.random() - 0.5) * 100
+      const burstY = y + (Math.random() - 0.5) * 100
+      createSparkleAt(burstX - sparkleWrapper.getBoundingClientRect().left, 
+                      burstY - sparkleWrapper.getBoundingClientRect().top)
+    }, Math.random() * 500)
+  }
+  
+  // Remove explosion after animation finishes
+  setTimeout(() => {
+    explosion.remove()
+  }, 800)
+}
+
+// Function to create stars for the explosion
+function createStar(x, y) {
+  const star = document.createElement('div')
+  star.className = 'star'
+  
+  // Random size between 15 and 35 pixels
+  const size = Math.random() * 20 + 15
+  star.style.width = `${size}px`
+  star.style.height = `${size}px`
+  
+  // Random position around the center
+  const offsetX = (Math.random() - 0.5) * 80
+  const offsetY = (Math.random() - 0.5) * 80
+  star.style.left = `${x + offsetX}px`
+  star.style.top = `${y + offsetY}px`
+  
+  // Random rotation
+  const rotation = Math.random() * 360
+  star.style.transform = `rotate(${rotation}deg)`
+  
+  // Random color variation
+  const hue = 40 + Math.random() * 20 // Gold range
+  star.style.backgroundColor = `hsl(${hue}, 90%, 65%)`
+  
+  document.body.appendChild(star)
+  
+  // Random direction for the star to fly
+  const angle = Math.random() * Math.PI * 2
+  const distance = 150 + Math.random() * 250
+  const destinationX = x + Math.cos(angle) * distance
+  const destinationY = y + Math.sin(angle) * distance
+  
+  // Animate the star flying outward
+  setTimeout(() => {
+    star.style.transition = 'all 1.5s cubic-bezier(0.1, 0.8, 0.2, 1)'
+    star.style.left = `${destinationX}px`
+    star.style.top = `${destinationY}px`
+    star.style.transform = `rotate(${rotation + 180}deg) scale(0.1)`
+    star.style.opacity = '0'
+  }, 10)
+  
+  // Remove star after animation finishes
+  setTimeout(() => {
+    star.remove()
+  }, 1500)
+}
+
+// Function to create particles
+function createParticle(x, y) {
+  const particle = document.createElement('div')
+  particle.className = 'particle'
+  
+  // Random size between 3 and 8 pixels
+  const size = Math.random() * 5 + 3
+  particle.style.width = `${size}px`
+  particle.style.height = `${size}px`
+  
+  // Set starting position
+  particle.style.left = `${x}px`
+  particle.style.top = `${y}px`
+  
+  // Random color
+  const hue = Math.random() * 60 + 20 // Gold to red range
+  const saturation = 80 + Math.random() * 20
+  const lightness = 50 + Math.random() * 30
+  particle.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`
+  
+  // Set random translation distance
+  const tx = (Math.random() - 0.5) * 400
+  const ty = (Math.random() - 0.5) * 400
+  particle.style.setProperty('--tx', `${tx}px`)
+  particle.style.setProperty('--ty', `${ty}px`)
+  
+  document.body.appendChild(particle)
+  
+  // Remove particle after animation finishes
+  setTimeout(() => {
+    particle.remove()
+  }, 1000)
+}
 
 function openCookie() {
   screenToggle()

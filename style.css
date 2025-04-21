@@ -247,3 +247,152 @@ button:hover {
     transform: translateY(0);
   }
 }
+
+/* Sparkles effect for cookie hover */
+.sparkle-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: visible;
+}
+
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+  background-color: transparent;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  background-color: #FFD700;
+  box-shadow: 0 0 12px 3px rgba(255, 215, 0, 0.8), 0 0 16px 6px rgba(255, 192, 203, 0.4);
+  animation: sparkle-animation 0.6s ease-in-out;
+  filter: blur(0.3px);
+}
+
+.sparkle.tiny {
+  width: 6px;
+  height: 6px;
+  animation-duration: 0.4s;
+}
+
+.sparkle.medium {
+  width: 10px;
+  height: 10px;
+  animation-duration: 0.6s;
+}
+
+.sparkle.large {
+  width: 14px;
+  height: 14px;
+  animation-duration: 0.8s;
+}
+
+@keyframes sparkle-animation {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(1.2) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+/* Glow effect for cookie on hover */
+.sparkle-wrapper:hover img {
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7)) brightness(1.1);
+  transition: filter 0.3s ease;
+}
+
+/* Explosion effect when cookie opens */
+.explosion {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 200;
+  background: radial-gradient(circle, rgba(255,215,0,1) 0%, rgba(255,215,0,0.8) 30%, rgba(255,192,203,0.6) 60%, rgba(255,255,255,0) 100%);
+  animation: explosion-animation 0.8s cubic-bezier(0.1, 0.5, 0.1, 1);
+  mix-blend-mode: screen;
+}
+
+@keyframes explosion-animation {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(200);
+    opacity: 0;
+  }
+}
+
+/* Star element for the explosion */
+.star {
+  position: absolute;
+  background-color: #FFD700;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  animation: star-animation 1.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0 15px 2px rgba(255, 215, 0, 0.6);
+  filter: blur(0.3px);
+}
+
+@keyframes star-animation {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+    transform: scale(1.2) rotate(20deg);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1) rotate(80deg);
+  }
+  100% {
+    transform: scale(0.1) rotate(180deg) translate(200px, 200px);
+    opacity: 0;
+  }
+}
+
+/* Secondary explosion particles */
+.particle {
+  position: absolute;
+  background-color: #FFD700;
+  border-radius: 50%;
+  animation: particle-animation 1s cubic-bezier(0.1, 0.8, 0.2, 1);
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0 10px 1px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes particle-animation {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(0.1) translate(var(--tx), var(--ty));
+    opacity: 0;
+  }
+}
