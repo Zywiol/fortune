@@ -10,7 +10,7 @@
 
 body {
   height: 100vh;
-  background: linear-gradient(45deg, #EB5F43 0%, #f3804f 100%);
+  background: linear-gradient(45deg, #156e4c 0%, #156e4c 100%);
   background-size: 200% 200%;
 
   display: grid;
@@ -42,7 +42,7 @@ h1, p, h2 {
 }
 
 h1, h2 {
-  font-family: 'Montserrat';
+  font-family: 'Open Sans', sans-serif;
   font-weight: 700;
   font-size: 2.4rem;
   line-height: 2.9rem;
@@ -51,7 +51,7 @@ h1, h2 {
 }
 
 .screen1 p {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 1.5rem;
   line-height: 2rem;
@@ -81,7 +81,7 @@ h1, h2 {
 }
 
 .fortune p {
-  font-family: 'Dancing Script', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 2.4rem;
   line-height: 2.9rem;
@@ -96,7 +96,7 @@ button {
   border: none;
   padding: 1.6rem;
 
-  font-family: 'DM Sans';
+  font-family: 'Open Sans', sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
   line-height: 2rem;
