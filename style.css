@@ -90,7 +90,7 @@ h1, h2 {
 }
 
 button {
-  background: #EB5F43;
+  background: #8A2BE2;
   border-radius: 4px;
   border: none;
   padding: 1.6rem;
@@ -107,11 +107,27 @@ button {
 }
 
 button:hover {
-  background: #F38671;
+  background: #9F3FF7;
 }
 
 .screen2 img {
   margin-bottom: 1.7rem;
+}
+
+.share-text {
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  color: #333333;
+  padding: 1rem;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.share-text p:first-child {
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  font-size: 1.8rem;
 }
 
 @keyframes shake {
