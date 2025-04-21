@@ -10,13 +10,12 @@
 
 body {
   height: 100vh;
-  background: linear-gradient(45deg, #156e4c 0%, #156e4c 100%);
-  background-size: 200% 200%;
+  background: url('Blue Modern Astronomy Presentation.png') center center;
+  background-size: cover;
+  background-attachment: fixed;
 
   display: grid;
   place-items: center;
-
-  animation: gradient 10s ease infinite;
 }
 
 .hide {
@@ -28,10 +27,10 @@ main {
   box-shadow: 0px 2rem 5rem rgba(0, 0, 0, 0.8);
   border-radius: .5rem;
   
-  padding: 4.8rem 6.4rem;
+  padding: 6rem 8rem;
   margin-top: -8rem;
 
-  width: min(42.8rem, 90%);
+  width: min(55rem, 90%);
   text-align: center;
 }
 
@@ -147,19 +146,5 @@ button:hover {
   100% {
     opacity: 100;
     transform: translateY(0);
-  }
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
   }
 }
